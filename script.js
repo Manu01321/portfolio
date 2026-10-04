@@ -93,16 +93,45 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Mobile menu toggle
-  mobileToggle?.addEventListener('click', () => {
-    navMenu?.classList.toggle('open');
+  // Mobile menu toggle & outside-click handler
+  function closeMobileNav() {
+    navMenu?.classList.remove('open');
+    mobileToggle?.classList.remove('active');
+    document.body.classList.remove('nav-locked');
+  }
+
+  function toggleMobileNav() {
+    const isOpen = navMenu?.classList.toggle('open');
+    mobileToggle?.classList.toggle('active', isOpen);
+    if (isOpen) {
+      document.body.classList.add('nav-locked');
+    } else {
+      document.body.classList.remove('nav-locked');
+    }
+  }
+
+  mobileToggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMobileNav();
   });
 
   // Close mobile menu when clicking nav links
   navLinks.forEach((link) => {
-    link.addEventListener('click', () => {
-      navMenu?.classList.remove('open');
-    });
+    link.addEventListener('click', closeMobileNav);
+  });
+
+  // Close when tapping outside the mobile nav
+  document.addEventListener('click', (e) => {
+    if (navMenu?.classList.contains('open') && !navMenu.contains(e.target) && !mobileToggle?.contains(e.target)) {
+      closeMobileNav();
+    }
+  });
+
+  // Mobile CV button inside nav menu
+  const mobileResumeBtn = document.getElementById('mobile-resume-btn');
+  mobileResumeBtn?.addEventListener('click', () => {
+    closeMobileNav();
+    openResume();
   });
 
   /* ==========================================================================
