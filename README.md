@@ -18,7 +18,7 @@ A modern, high-performance portfolio web application showcasing full-stack engin
   - **Shift Cart:** Full-Stack E-Commerce Shopping Platform (PHP, MySQL, JavaScript, Bootstrap) with system architecture modal.
   - **Watsonx & LangChain RAG Chatbot:** Conversational retrieval system engineered on IBM Cloud.
 - **🛠️ Technical Skills Matrix:** Categorized interactive competencies across Languages, AI/Cloud, Web Frameworks, Databases, and Core CS (DSA & OOP).
-- **📄 Interactive CV Modal:** Full formatted resume with one-click clean `@media print` A4 PDF export.
+- **📄 Dedicated ATS Resume:** Clean, single-page ATS-compliant resume ([resume.html](resume.html)) with 1-click A4 print & PDF export.
 - **📬 Multi-Channel Contact Hub:**
   - Automated background email dispatch via AJAX.
   - 1-click **Open in Gmail Web** pre-filled composer (zero desktop client needed).

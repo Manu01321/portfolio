@@ -127,11 +127,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Mobile CV button inside nav menu
+  // Mobile Resume link inside nav menu
   const mobileResumeBtn = document.getElementById('mobile-resume-btn');
   mobileResumeBtn?.addEventListener('click', () => {
     closeMobileNav();
-    openResume();
   });
 
   /* ==========================================================================
@@ -199,9 +198,59 @@ document.addEventListener('DOMContentLoaded', () => {
   const resWarning = document.getElementById('res-warning');
   const resMultilingual = document.getElementById('res-multilingual');
 
+  function triggerScanEffect() {
+    const scanLine = document.getElementById('sim-scan-line');
+    if (scanLine) {
+      scanLine.classList.remove('scanning');
+      void scanLine.offsetWidth;
+      scanLine.classList.add('scanning');
+    }
+  }
+
+  function generateAiQueryResponse(drugKey, query) {
+    const q = query.toLowerCase();
+    if (q.includes('food') || q.includes('meal') || q.includes('stomach') || q.includes('milk')) {
+      if (drugKey === 'rx1') {
+        return `<strong>Query Analysis:</strong> "${query}"<br><span style="color:var(--accent-emerald);">Gemini Clinical Intelligence:</span> <strong>Amoxicillin 500mg</strong> can be consumed with or without food. Taking it at the start of a meal or with a glass of milk significantly mitigates gastrointestinal discomfort.`;
+      } else if (drugKey === 'rx2') {
+        return `<strong>Query Analysis:</strong> "${query}"<br><span style="color:var(--accent-emerald);">Gemini Clinical Intelligence:</span> <strong>Metformin 850mg ER</strong> must ALWAYS be taken with meals (breakfast & dinner). Ingesting with food slows stomach emptying and minimizes adverse digestive effects like nausea.`;
+      } else {
+        return `<strong>Query Analysis:</strong> "${query}"<br><span style="color:var(--accent-emerald);">Gemini Clinical Intelligence:</span> <strong>Paracetamol + Cetirizine</strong> is best taken after a light meal with a full glass of water. Avoid heavy or high-fat meals directly prior to bedtime.`;
+      }
+    }
+
+    if (q.includes('miss') || q.includes('forgot') || q.includes('late')) {
+      return `<strong>Query Analysis:</strong> "${query}"<br><span style="color:var(--accent-cyan);">Gemini Dosage Advisory:</span> Take the missed dose as soon as you remember. However, if it is close to your next scheduled dose, skip the forgotten dose and adhere to your standard timetable. <strong>Never take a double dose</strong> to make up for missed medication.`;
+    }
+
+    if (q.includes('side') || q.includes('effect') || q.includes('danger') || q.includes('warning')) {
+      if (drugKey === 'rx1') {
+        return `<strong>Query Analysis:</strong> "${query}"<br><span style="color:#f59e0b;">Safety Alert:</span> Watch for allergic hypersensitivity (urticaria, rash, facial swelling). If breathing becomes labored, seek emergency medical care immediately.`;
+      } else if (drugKey === 'rx2') {
+        return `<strong>Query Analysis:</strong> "${query}"<br><span style="color:#f59e0b;">Safety Alert:</span> Rare but critical: Lactic acidosis risk. Report unusual muscle pain, severe drowsiness, or shallow breathing to your physician immediately.`;
+      } else {
+        return `<strong>Query Analysis:</strong> "${query}"<br><span style="color:#f59e0b;">Safety Alert:</span> Cetirizine can cause marked drowsiness. Do not drive or operate machinery. Do not exceed the 4,000 mg daily ceiling for Paracetamol from all sources.`;
+      }
+    }
+
+    if (q.includes('alcohol') || q.includes('drink') || q.includes('beer') || q.includes('coffee') || q.includes('caffeine')) {
+      if (drugKey === 'rx2') {
+        return `<strong>Query Analysis:</strong> "${query}"<br><span style="color:#ef4444;">Contraindication Warning:</span> Alcohol consumption while taking Metformin significantly elevates the risk of severe hypoglycemia and lactic acidosis. Refrain from alcohol during treatment.`;
+      } else if (drugKey === 'rx3') {
+        return `<strong>Query Analysis:</strong> "${query}"<br><span style="color:#ef4444;">Contraindication Warning:</span> Alcohol intensifies the central nervous system sedative effects of Cetirizine and compounds liver load with Paracetamol. Concurrent intake is strictly not advised.`;
+      } else {
+        return `<strong>Query Analysis:</strong> "${query}"<br><span style="color:#f59e0b;">Interaction Note:</span> Alcohol may impede your body's immune recovery from bacterial infection and aggravate mild nausea. Moderate hydration with water is recommended.`;
+      }
+    }
+
+    return `<strong>Query Analysis:</strong> "${query}"<br><span style="color:var(--accent-emerald);">Gemini Multimodal Reasoning:</span> Verified against active pharmacology database. Safe when taken strictly as prescribed. Always consult your attending medical professional for regimen adjustments.`;
+  }
+
   function renderSimulatorData(key, lang = 'en', customQuery = '') {
     const data = presetData[key];
     if (!data) return;
+
+    triggerScanEffect();
 
     if (resDrug) resDrug.textContent = data.drug;
     if (resDosage) resDosage.textContent = data.dosage;
@@ -209,9 +258,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (resDuration) resDuration.textContent = data.duration;
     if (resTreatment) resTreatment.textContent = data.treatment;
 
-    if (customQuery.trim()) {
+    if (customQuery && customQuery.trim()) {
       if (resWarning) {
-        resWarning.innerHTML = `<strong>Query Analysis:</strong> "${customQuery}"<br><span style="color:var(--accent-emerald);">Gemini AI Verification:</span> Safe when taken as instructed with water. Always avoid combining with unverified over-the-counter NSAIDs.`;
+        resWarning.innerHTML = generateAiQueryResponse(key, customQuery.trim());
       }
     } else {
       if (resWarning) resWarning.textContent = data.warning;
@@ -233,11 +282,10 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
       activePresetKey = btn.dataset.preset;
 
-      // Simulate Gemini processing effect
       if (simStatus) simStatus.innerHTML = `<span style="color:var(--accent-cyan);">⚙ Processing Multimodal Vision Embedding...</span>`;
       setTimeout(() => {
-        renderSimulatorData(activePresetKey, activeLang);
-      }, 250);
+        renderSimulatorData(activePresetKey, activeLang, simCustomInput?.value || '');
+      }, 200);
     });
   });
 
@@ -248,6 +296,23 @@ document.addEventListener('DOMContentLoaded', () => {
       pill.classList.add('active');
       activeLang = pill.dataset.lang;
       renderSimulatorData(activePresetKey, activeLang, simCustomInput?.value || '');
+    });
+  });
+
+  // Handle Quick Query Prompt Pills
+  const queryPills = document.querySelectorAll('.query-pill');
+  queryPills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      const promptText = pill.dataset.query;
+      if (simCustomInput) simCustomInput.value = promptText;
+      triggerScanEffect();
+      if (simStatus) {
+        simStatus.innerHTML = `<span style="color:var(--accent-cyan);">⚡ Querying Gemini 1.5 Pro Clinical Context...</span>`;
+      }
+      setTimeout(() => {
+        renderSimulatorData(activePresetKey, activeLang, promptText);
+        showToast('Clinical reasoning analysis updated!');
+      }, 250);
     });
   });
 
@@ -262,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       renderSimulatorData(activePresetKey, activeLang, userQuery);
       showToast('MediDecode Multimodal Pipeline executed successfully!');
-    }, 400);
+    }, 300);
   });
 
   /* ==========================================================================
@@ -307,6 +372,32 @@ document.addEventListener('DOMContentLoaded', () => {
   const viewDetailBtns = document.querySelectorAll('.view-details-btn');
 
   const projectDetailsMap = {
+    medidecode: {
+      title: 'MediDecode — Multimodal Prescription Intelligence Architecture',
+      html: `
+        <div style="font-size:0.92rem; line-height: 1.7; color: var(--text-secondary);">
+          <div style="background: rgba(255,255,255,0.03); border:1px solid var(--border-subtle); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem;">
+            <h4 style="color:#ffffff; margin-bottom: 0.5rem;">1. Multimodal Vision Pipeline (Google Gemini 1.5 Pro)</h4>
+            <p>Processes complex, handwritten prescription camera captures and multi-page PDF medical reports via Google Gemini API's multimodal vision tokens. Employs <code>PyPDF</code> and <code>Pillow (PIL)</code> image preprocessing for high-contrast OCR clarity before ingestion.</p>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.03); border:1px solid var(--border-subtle); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem;">
+            <h4 style="color:#ffffff; margin-bottom: 0.5rem;">2. Clinical Prompt Engineering & Dosage Parsing</h4>
+            <p>Utilizes structured few-shot system prompts instructing the LLM to output sanitized JSON containing active chemical compounds, exact dosage strength, administration intervals, and contraindication flags with high certainty thresholds.</p>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.03); border:1px solid var(--border-subtle); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem;">
+            <h4 style="color:#ffffff; margin-bottom: 0.5rem;">3. Multilingual Translation & Patient Accessibility</h4>
+            <p>Breaks down complex medical jargon into clear patient-friendly instructions translated into regional Indian languages (Kannada & Hindi) alongside standard English, expanding healthcare accessibility for rural and non-English-speaking users.</p>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.03); border:1px solid var(--border-subtle); border-radius: 12px; padding: 1.25rem;">
+            <h4 style="color:#ffffff; margin-bottom: 0.5rem;">4. Persistent SQLite Audit History & Medical Chatbot</h4>
+            <p>Stores historic prescription analyses securely in a local <strong>SQLite</strong> database with session authentication. Integrates a conversational RAG chatbot allowing patients to ask contextual follow-up questions regarding side effects and missed dosages.</p>
+          </div>
+        </div>
+      `
+    },
     shiftcart: {
       title: 'Shift Cart — System Architecture & Data Pipeline',
       html: `
@@ -379,47 +470,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ==========================================================================
-     6. RESUME PREVIEW MODAL & PRINTING
+     6. MODAL ESCAPE KEY LISTENER
      ========================================================================== */
-  const resumeModal = document.getElementById('resume-modal');
-  const openResumeBtn = document.getElementById('open-resume-btn');
-  const heroResumeTrigger = document.getElementById('hero-resume-trigger');
-  const mobileResumeBtn = document.getElementById('mobile-resume-btn');
-  const closeResumeBtn = document.getElementById('close-resume-btn');
-  const printResumeBtn = document.getElementById('print-resume-btn');
-
-  function openResume() {
-    resumeModal?.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeResume() {
-    resumeModal?.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  openResumeBtn?.addEventListener('click', openResume);
-  heroResumeTrigger?.addEventListener('click', openResume);
-  mobileResumeBtn?.addEventListener('click', openResume);
-  closeResumeBtn?.addEventListener('click', closeResume);
-
-  resumeModal?.addEventListener('click', (e) => {
-    if (e.target === resumeModal) {
-      closeResume();
-    }
-  });
-
-  // Escape key closes modals
+  // Escape key closes open project modal
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      closeResume();
       projectModal?.classList.remove('open');
+      document.body.style.overflow = '';
     }
-  });
-
-  // Print trigger
-  printResumeBtn?.addEventListener('click', () => {
-    window.print();
   });
 
   /* ==========================================================================
@@ -492,16 +550,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function createGmailWebUrl(data) {
-    const sub = encodeURIComponent(data.subject || 'Software Engineering Role / Inquiry');
+    const sub = encodeURIComponent(data.subject || 'Software Engineering Internship / Discussion');
+    const msg = data.message || 'Hi Manoj, I reviewed your MediDecode and HireHive projects on your portfolio and would like to discuss an engineering opportunity with you.';
     const bodyText = encodeURIComponent(
-      `Hello Manoj,\n\nName: ${data.name || 'Visitor'}\nEmail: ${data.email || 'N/A'}\n\nMessage:\n${data.message || ''}\n\nSent from Portfolio Website`
+      `Hello Manoj,\n\n${msg}\n\nSender Name: ${data.name || 'Visitor'}\nSender Email: ${data.email || 'N/A'}\n\nSent from Portfolio Website`
     );
     return `https://mail.google.com/mail/?view=cm&fs=1&to=mmanoj121m@gmail.com&su=${sub}&body=${bodyText}`;
   }
 
   function createWhatsappUrl(data) {
+    const msg = data.message || 'Hi Manoj! I reviewed your MediDecode and HireHive projects and would like to connect with you regarding an opportunity.';
     const text = encodeURIComponent(
-      `Hello Manoj! I reviewed your portfolio.\nName: ${data.name || 'Visitor'}\nEmail: ${data.email || 'N/A'}\nSubject: ${data.subject || 'Opportunity'}\n\nMessage: ${data.message || ''}`
+      `Hello Manoj! I reviewed your portfolio.\nName: ${data.name || 'Visitor'}\nEmail: ${data.email || 'N/A'}\nOpportunity: ${data.subject || 'Software Engineering Role'}\n\nMessage: ${msg}`
     );
     return `https://wa.me/916363620034?text=${text}`;
   }
@@ -510,7 +570,14 @@ document.addEventListener('DOMContentLoaded', () => {
   btnOpenGmail?.addEventListener('click', () => {
     const data = getFormData();
     const gmailUrl = createGmailWebUrl(data);
-    window.open(gmailUrl, '_blank');
+    try {
+      const win = window.open(gmailUrl, '_blank');
+      if (!win || win.closed || typeof win.closed === 'undefined') {
+        window.location.href = gmailUrl;
+      }
+    } catch (e) {
+      window.location.href = gmailUrl;
+    }
     showToast('Opening Gmail Web composer...');
   });
 
@@ -518,7 +585,14 @@ document.addEventListener('DOMContentLoaded', () => {
   btnOpenWhatsapp?.addEventListener('click', () => {
     const data = getFormData();
     const waUrl = createWhatsappUrl(data);
-    window.open(waUrl, '_blank');
+    try {
+      const win = window.open(waUrl, '_blank');
+      if (!win || win.closed || typeof win.closed === 'undefined') {
+        window.location.href = waUrl;
+      }
+    } catch (e) {
+      window.location.href = waUrl;
+    }
     showToast('Opening WhatsApp chat with Manoj...');
   });
 
