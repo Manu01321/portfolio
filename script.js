@@ -384,6 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const resumeModal = document.getElementById('resume-modal');
   const openResumeBtn = document.getElementById('open-resume-btn');
   const heroResumeTrigger = document.getElementById('hero-resume-trigger');
+  const mobileResumeBtn = document.getElementById('mobile-resume-btn');
   const closeResumeBtn = document.getElementById('close-resume-btn');
   const printResumeBtn = document.getElementById('print-resume-btn');
 
@@ -399,6 +400,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   openResumeBtn?.addEventListener('click', openResume);
   heroResumeTrigger?.addEventListener('click', openResume);
+  mobileResumeBtn?.addEventListener('click', openResume);
   closeResumeBtn?.addEventListener('click', closeResume);
 
   resumeModal?.addEventListener('click', (e) => {
