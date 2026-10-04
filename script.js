@@ -298,6 +298,32 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         </div>
       `
+    },
+    hirehive: {
+      title: 'HireHive — Recruitment Workflow Engine Architecture',
+      html: `
+        <div style="font-size:0.92rem; line-height: 1.7; color: var(--text-secondary);">
+          <div style="background: rgba(255,255,255,0.03); border:1px solid var(--border-subtle); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem;">
+            <h4 style="color:#ffffff; margin-bottom: 0.5rem;">1. FastAPI & Dynamic Google Sheets Engine</h4>
+            <p>Connects to Google Sheets via <code>gspread</code> with service account OAuth2. Features a <strong>Dynamic Column Finder</strong> that identifies sheet fields by keyword headers rather than fixed indices, coupled with a 4-second short-lived in-memory cache to stay well within Google API quotas while ensuring live data freshness.</p>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.03); border:1px solid var(--border-subtle); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem;">
+            <h4 style="color:#ffffff; margin-bottom: 0.5rem;">2. 10-Stage Candidate Lifecycle State Machine</h4>
+            <p>Normalizes unconstrained spreadsheet status entries into a predictable, robust 10-stage lifecycle (<code>applied</code> ➔ <code>shortlisted</code> ➔ <code>interview</code> ➔ <code>accepted</code> ➔ <code>hired</code> ➔ <code>offer</code> ➔ <code>ongoing</code> ➔ <code>completed</code>). Supports single, multi-select, and threshold-based bulk shortlisting updating cells in single batch API writes.</p>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.03); border:1px solid var(--border-subtle); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem;">
+            <h4 style="color:#ffffff; margin-bottom: 0.5rem;">3. Automated Document Generation & Drive Sync</h4>
+            <p>Automates offer letter generation from Word templates using <code>python-docx</code> placeholder substitution (<code>{Name}</code>, <code>{Role}</code>, <code>{Start_Date}</code>). Converts documents to PDF with <code>ReportLab</code>/<code>docx2pdf</code>, stores them safely in designated Google Drive folders, and dispatches them with custom MIME email templates via TLS-secured SMTP.</p>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.03); border:1px solid var(--border-subtle); border-radius: 12px; padding: 1.25rem;">
+            <h4 style="color:#ffffff; margin-bottom: 0.5rem;">4. Tamper-Proof QR Code Verification & Audit Logging</h4>
+            <p>Generates cryptographic certificate IDs formatted as <code>CERT-YYYYMMDD-IDENTIFIER-UUID</code> and generates Level-Q error-correction QR codes for instant physical and digital authenticity verification. Maintains an immutable circular 100-event JSON activity log for complete operational auditing.</p>
+          </div>
+        </div>
+      `
     }
   };
 

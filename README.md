@@ -14,6 +14,7 @@ A modern, high-performance portfolio web application showcasing full-stack engin
 - **⚡ Interactive MediDecode Prescription Intelligence Lab:** Live interactive test simulation of the multimodal Google Gemini healthcare extraction engine with Kannada, Hindi, and English multilingual translations.
 - **💼 Featured Project Showcases:**
   - **MediDecode:** Multimodal LLM Prescription Intelligence (Python, Streamlit, Gemini API, SQLite, PyPDF, PIL).
+  - **HireHive:** End-to-End Recruitment & Internship Automation Engine (FastAPI, React, Vite, Google Sheets API, python-docx, QR-Code Verification, SMTP).
   - **Shift Cart:** Full-Stack E-Commerce Shopping Platform (PHP, MySQL, JavaScript, Bootstrap) with system architecture modal.
   - **Watsonx & LangChain RAG Chatbot:** Conversational retrieval system engineered on IBM Cloud.
 - **🛠️ Technical Skills Matrix:** Categorized interactive competencies across Languages, AI/Cloud, Web Frameworks, Databases, and Core CS (DSA & OOP).
