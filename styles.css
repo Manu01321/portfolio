@@ -1865,38 +1865,160 @@ section {
   padding: 2rem;
 }
 
-/* Printable Resume Styling inside modal */
-.resume-paper {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 2rem;
+.modal-container.resume-modal-container {
+  max-width: 860px;
+  background: #090d16;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.resume-paper h2 {
-  font-size: 1.8rem;
+/* Authentic White Document Resume Styling matching User's CV */
+.resume-paper {
+  background: #ffffff;
+  color: #111827;
+  border-radius: 4px;
+  padding: 2.75rem 3.25rem;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.5);
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.resume-header {
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.resume-name {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1e3a8a;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+}
+
+.resume-contact-subline {
+  font-size: 0.82rem;
+  color: #374151;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   margin-bottom: 0.25rem;
 }
 
-.resume-contact-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border-subtle);
+.resume-contact-subline a {
+  color: #1d4ed8;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--transition-fast);
 }
 
-.resume-sec-title {
-  font-size: 1.05rem;
+.resume-contact-subline a:hover {
+  color: #1e3a8a;
+}
+
+.resume-contact-subline .sep {
+  color: #9ca3af;
+  font-weight: 300;
+}
+
+.resume-section {
+  margin-top: 1.15rem;
+}
+
+.resume-section-heading {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #1e3a8a;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--accent-cyan);
-  margin: 1.5rem 0 0.75rem 0;
-  border-bottom: 1px solid rgba(6, 182, 212, 0.2);
-  padding-bottom: 0.3rem;
+  letter-spacing: 0.03em;
+  border-bottom: 2px solid #1e3a8a;
+  padding-bottom: 2px;
+  margin: 0 0 0.45rem 0;
+}
+
+.resume-text {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+  text-align: justify;
+}
+
+.resume-skill-row {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: #1f2937;
+  margin-bottom: 0.2rem;
+}
+
+.resume-skill-row strong {
+  color: #111827;
+  font-weight: 700;
+}
+
+.resume-entry {
+  margin-bottom: 0.65rem;
+}
+
+.resume-entry-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.resume-entry-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.resume-entry-date {
+  font-size: 0.84rem;
+  font-style: italic;
+  color: #4b5563;
+  white-space: nowrap;
+}
+
+.resume-entry-sub {
+  font-size: 0.83rem;
+  font-style: italic;
+  color: #4b5563;
+  margin-bottom: 0.2rem;
+}
+
+.resume-bullet-list {
+  list-style-type: disc;
+  padding-left: 1.35rem;
+  margin: 0.25rem 0 0.4rem 0;
+  font-size: 0.85rem;
+  color: #1f2937;
+  line-height: 1.48;
+}
+
+.resume-bullet-list li {
+  margin-bottom: 0.22rem;
+}
+
+.resume-tech-line {
+  list-style: none;
+  margin-left: -1.35rem;
+  font-size: 0.84rem;
+  color: #374151;
+  margin-top: 0.25rem;
+}
+
+.resume-tech-line strong {
+  color: #111827;
+}
+
+.resume-edu-entry {
+  margin-bottom: 0.5rem;
 }
 
 /* Toast Notification */
@@ -2158,11 +2280,23 @@ section {
   }
 
   .resume-paper {
-    padding: 1.25rem;
+    padding: 1.5rem 1.15rem !important;
+    font-size: 0.84rem !important;
   }
 
-  .resume-paper h2 {
-    font-size: 1.5rem;
+  .resume-name {
+    font-size: 1.35rem !important;
+  }
+
+  .resume-contact-subline {
+    font-size: 0.78rem !important;
+    gap: 0.25rem;
+  }
+
+  .resume-entry-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
   }
 
   /* Forms & Touch Input - Ensure 16px to prevent iOS auto-zoom bug */
@@ -2306,30 +2440,40 @@ section {
     border: none !important;
     color: #111827 !important;
     padding: 0 !important;
+    box-shadow: none !important;
   }
 
-  .resume-paper h2 {
-    color: #0f172a !important;
-    font-size: 24pt !important;
+  .resume-name {
+    color: #1e3a8a !important;
+    font-size: 20pt !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
-  .resume-sec-title {
-    color: #2563eb !important;
-    border-bottom: 2px solid #2563eb !important;
-    font-size: 13pt !important;
-    margin-top: 15pt !important;
+  .resume-section-heading {
+    color: #1e3a8a !important;
+    border-bottom: 2px solid #1e3a8a !important;
+    font-size: 11pt !important;
+    margin-top: 10pt !important;
+    margin-bottom: 4pt !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
-  .resume-contact-bar,
+  .resume-contact-subline,
   .resume-paper p,
   .resume-paper li,
   .resume-paper span,
   .resume-paper div {
-    color: #374151 !important;
+    color: #1f2937 !important;
+    font-size: 9.5pt !important;
+    line-height: 1.42 !important;
   }
 
-  .mono-tag {
-    color: #2563eb !important;
-    font-weight: bold !important;
+  .resume-contact-subline a {
+    color: #1d4ed8 !important;
+    text-decoration: underline !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 }
