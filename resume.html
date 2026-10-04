@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manoj Kumar T C — ATS Resume</title>
+  <meta name="description" content="Single-page ATS friendly resume of Manoj Kumar T C — Software Developer and AI Systems Engineer.">
+  <meta name="author" content="Manoj Kumar T C">
+
+  <!-- Inter Google Font for Crisp Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       RESET & BASE SETUP
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 14px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: #0b0f19;
+      color: #111827;
+      line-height: 1.38;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px 10px 40px;
+    }
+
+    /* ==========================================================================
+       TOP ACTION BAR (SCREEN ONLY)
+       ========================================================================== */
+    .top-action-bar {
+      width: 100%;
+      max-width: 820px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      padding: 12px 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .action-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .ats-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      letter-spacing: 0.02em;
+    }
+
+    .ats-badge .dot {
+      width: 6px;
+      height: 6px;
+      background: #10b981;
+      border-radius: 50%;
+    }
+
+    .action-buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 7px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-print {
+      background: #1e3a8a;
+      color: #ffffff;
+      border-color: #2563eb;
+    }
+
+    .btn-print:hover {
+      background: #1d4ed8;
+      box-shadow: 0 0 14px rgba(37, 99, 235, 0.5);
+    }
+
+    .btn-portfolio {
+      background: rgba(255, 255, 255, 0.06);
+      color: #e2e8f0;
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-portfolio:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+    }
+
+    /* ==========================================================================
+       RESUME SHEET (CALIBRATED FOR EXACT SINGLE A4 PAGE)
+       ========================================================================== */
+    .resume-sheet {
+      width: 100%;
+      max-width: 820px;
+      background: #ffffff;
+      color: #111827;
+      padding: 32px 42px;
+      border-radius: 4px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+      box-sizing: border-box;
+    }
+
+    /* Header */
+    .resume-header {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .candidate-name {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: #1e3a8a;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .contact-line {
+      font-size: 0.78rem;
+      color: #374151;
+      line-height: 1.4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .contact-line a {
+      color: #1d4ed8;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .contact-line a:hover {
+      color: #1e3a8a;
+    }
+
+    .contact-sep {
+      color: #9ca3af;
+      margin: 0 1px;
+    }
+
+    /* Section Headings */
+    .section-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #1e3a8a;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      border-bottom: 1.5px solid #1e3a8a;
+      padding-bottom: 1px;
+      margin-top: 7px;
+      margin-bottom: 4px;
+    }
+
+    /* Summary */
+    .summary-text {
+      font-size: 0.78rem;
+      line-height: 1.38;
+      color: #1f2937;
+      text-align: justify;
+      margin-bottom: 3px;
+    }
+
+    /* Technical Skills */
+    .skill-line {
+      font-size: 0.77rem;
+      line-height: 1.38;
+      color: #1f2937;
+      margin-bottom: 1.5px;
+    }
+
+    .skill-line strong {
+      color: #111827;
+      font-weight: 700;
+    }
+
+    /* Projects & Experience Entries */
+    .entry-block {
+      margin-bottom: 5px;
+    }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 0.81rem;
+      margin-bottom: 1px;
+    }
+
+    .entry-title {
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .entry-date {
+      font-size: 0.76rem;
+      font-style: italic;
+      color: #4b5563;
+      white-space: nowrap;
+    }
+
+    .entry-subline {
+      font-size: 0.75rem;
+      font-style: italic;
+      color: #4b5563;
+      margin-bottom: 1px;
+    }
+
+    /* Bullet Lists */
+    .bullet-list {
+      list-style-type: disc;
+      padding-left: 17px;
+      font-size: 0.765rem;
+      color: #1f2937;
+      line-height: 1.35;
+      margin-top: 1px;
+      margin-bottom: 2px;
+    }
+
+    .bullet-list li {
+      margin-bottom: 1.5px;
+    }
+
+    .bullet-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .tech-stack-row {
+      font-size: 0.755rem;
+      color: #374151;
+      margin-top: 1.5px;
+      padding-left: 17px;
+    }
+
+    .tech-stack-row strong {
+      color: #111827;
+    }
+
+    /* Education Items */
+    .edu-item {
+      margin-bottom: 3px;
+    }
+
+    .edu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 0.8rem;
+    }
+
+    .edu-title {
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .edu-meta {
+      font-weight: 500;
+      color: #4b5563;
+      font-size: 0.76rem;
+    }
+
+    .edu-college {
+      font-size: 0.75rem;
+      font-style: italic;
+      color: #4b5563;
+    }
+
+    /* ==========================================================================
+       PRINT STYLING (GUARANTEED 1-PAGE A4 / US LETTER)
+       ========================================================================== */
+    @page {
+      size: A4 portrait;
+      margin: 8mm 12mm;
+    }
+
+    @media print {
+      body {
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .resume-sheet {
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+
+      .candidate-name {
+        color: #1e3a8a !important;
+        font-size: 19pt !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .section-title {
+        color: #1e3a8a !important;
+        border-bottom: 1.5pt solid #1e3a8a !important;
+        font-size: 10.5pt !important;
+        margin-top: 6pt !important;
+        margin-bottom: 3pt !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .summary-text,
+      .skill-line,
+      .bullet-list,
+      .tech-stack-row,
+      .contact-line,
+      .entry-subline,
+      .edu-college {
+        color: #111827 !important;
+        font-size: 8.75pt !important;
+        line-height: 1.33 !important;
+      }
+
+      .entry-title,
+      .edu-title {
+        font-size: 9.2pt !important;
+      }
+
+      .contact-line a {
+        color: #1d4ed8 !important;
+        text-decoration: underline !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+
+    /* Responsive scaling for mobile view */
+    @media screen and (max-width: 640px) {
+      .resume-sheet {
+        padding: 20px 16px;
+      }
+
+      .candidate-name {
+        font-size: 1.35rem;
+      }
+
+      .contact-line {
+        font-size: 0.74rem;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .contact-sep {
+        display: none;
+      }
+
+      .entry-header,
+      .edu-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Screen Only Action Bar -->
+  <header class="top-action-bar no-print">
+    <div class="action-left">
+      <span class="ats-badge">
+        <span class="dot"></span>
+        <span>ATS-Friendly • 1-Page Calibrated</span>
+      </span>
+    </div>
+    <div class="action-buttons">
+      <button onclick="window.print()" class="action-btn btn-print" title="Print or Save as PDF (Calibrated to 1 Page)">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        <span>Download / Print PDF</span>
+      </button>
+      <a href="index.html" class="action-btn btn-portfolio">
+        <span>← Back to Portfolio</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Printable ATS Resume Sheet -->
+  <main class="resume-sheet" id="resume-document">
+
+    <!-- Header / Contact Info -->
+    <header class="resume-header">
+      <h1 class="candidate-name">MANOJ KUMAR T C</h1>
+      <div class="contact-line">
+        <span>RR Nagar, Bangalore, Karnataka – 560037</span>
+        <span class="contact-sep">|</span>
+        <a href="mailto:mmanoj121m@gmail.com">mmanoj121m@gmail.com</a>
+        <span class="contact-sep">|</span>
+        <a href="tel:6363620034">6363620034</a>
+      </div>
+      <div class="contact-line">
+        <a href="https://linkedin.com/in/manoj-tc" target="_blank" rel="noopener noreferrer">linkedin.com/in/manoj-tc</a>
+        <span class="contact-sep">|</span>
+        <span>GitHub: <a href="https://github.com/Manu01321" target="_blank" rel="noopener noreferrer">https://github.com/Manu01321</a></span>
+      </div>
+    </header>
+
+    <!-- Professional Summary -->
+    <section>
+      <h2 class="section-title">PROFESSIONAL SUMMARY</h2>
+      <p class="summary-text">
+        MCA candidate with hands-on experience building full-stack and AI-integrated applications using Python, FastAPI, and JavaScript. Delivered two end-to-end projects — a multimodal LLM healthcare platform and an automated HR recruitment lifecycle system — covering API integration, database design, and authentication. Seeking a Software Development Internship to apply strong DSA fundamentals and practical engineering skills to real-world problems.
+      </p>
+    </section>
+
+    <!-- Technical Skills -->
+    <section>
+      <h2 class="section-title">TECHNICAL SKILLS</h2>
+      <div class="skill-line"><strong>Languages:</strong> Python, C, Java (basic), JavaScript, HTML, CSS</div>
+      <div class="skill-line"><strong>Core CS Concepts:</strong> Data Structures & Algorithms (DSA), OOP fundamentals</div>
+      <div class="skill-line"><strong>Frameworks/Libraries:</strong> Streamlit, Bootstrap, React, FastAPI</div>
+      <div class="skill-line"><strong>Databases:</strong> MySQL, SQLite</div>
+      <div class="skill-line"><strong>Cloud & AI Tools:</strong> Google Gemini API, IBM Cloud, IBM Watsonx Assistant, LangChain</div>
+      <div class="skill-line"><strong>Tools:</strong> VS Code, Code Blocks, Jupyter Notebook, Git & GitHub</div>
+    </section>
+
+    <!-- Projects -->
+    <section>
+      <h2 class="section-title">PROJECTS</h2>
+
+      <!-- Project 1: MediDecode -->
+      <article class="entry-block">
+        <div class="entry-header">
+          <span class="entry-title">MediDecode: Multimodal LLM for Prescription Intelligence</span>
+        </div>
+        <ul class="bullet-list">
+          <li>Engineered an AI healthcare platform in Python and Streamlit that uses the Google Gemini API to extract structured data from prescription images and PDF reports in real time.</li>
+          <li>Designed prompt-engineering pipelines to generate dosage recommendations, side-effect summaries, and multilingual explanations, improving accessibility for non-English-speaking users.</li>
+          <li>Implemented user authentication and persistent report history with SQLite, plus an integrated AI chatbot for follow-up medical queries.</li>
+        </ul>
+        <div class="tech-stack-row">
+          <strong>Tech Stack:</strong> Python, Streamlit, Gemini API, SQLite, HTML/CSS, PyPDF, PIL.
+        </div>
+      </article>
+
+      <!-- Project 2: HireHive (Replacing E-Commerce) -->
+      <article class="entry-block">
+        <div class="entry-header">
+          <span class="entry-title">HireHive – Where hiring buzzes with automation</span>
+        </div>
+        <ul class="bullet-list">
+          <li>Engineered an enterprise-grade recruitment and internship lifecycle automation portal connecting a React & Vite admin UI to a FastAPI backend.</li>
+          <li>Automated a 10-stage candidate lifecycle (shortlisting, interview scheduling, offer generation, and certificate issuance) using Google Sheets API as a real-time collaborative database with dynamic caching.</li>
+          <li>Built an automated document generation pipeline with <code>python-docx</code> converting offer letters to PDF, alongside tamper-proof internship completion certificates featuring Level-Q QR-verification codes and TLS-secured SMTP email dispatch.</li>
+        </ul>
+        <div class="tech-stack-row">
+          <strong>Tech Stack:</strong> Python, FastAPI, React, Vite, Google Sheets API, python-docx, ReportLab, QR Code, SMTP.
+        </div>
+      </article>
+    </section>
+
+    <!-- Experience -->
+    <section>
+      <h2 class="section-title">EXPERIENCE</h2>
+
+      <article class="entry-block">
+        <div class="entry-header">
+          <span class="entry-title">IBM SkillsBuild Virtual Internship – AI & Cloud Technologies</span>
+          <span class="entry-date">Jul 2025</span>
+        </div>
+        <ul class="bullet-list">
+          <li>Completing a 4-week, 40+ hour intensive virtual internship gaining hands-on expertise in AI, Machine Learning, and Cloud Computing.</li>
+          <li>Developing and deploying AI/ML models, including Generative AI and Gemini-based models, on IBM Cloud using Jupyter Notebook.</li>
+          <li>Designed and implemented 2+ Retrieval Augmented Generation (RAG) systems, including a chatbot built on IBM Watsonx Assistant and a LangChain-based content generation project.</li>
+          <li>Earned foundational certifications in AI and cloud ecosystems.</li>
+        </ul>
+      </article>
+
+      <article class="entry-block">
+        <div class="entry-header">
+          <span class="entry-title">TechSaksham Internship – Foundation Course on IR 4.0 Technologies</span>
+          <span class="entry-date">AICTE & Edunet Foundation (Microsoft & SAP)</span>
+        </div>
+      </article>
+
+      <article class="entry-block">
+        <div class="entry-header">
+          <span class="entry-title">Anudeep Foundation – MERN Stack Development Course & Internship</span>
+        </div>
+        <ul class="bullet-list">
+          <li>Completed a foundation course and internship on the MERN stack (MongoDB, Express.js, React, Node.js), building full-stack web applications.</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- Education -->
+    <section>
+      <h2 class="section-title">EDUCATION</h2>
+
+      <div class="edu-item">
+        <div class="edu-header">
+          <span class="edu-title">Master of Computer Applications (Pursuing)</span>
+          <span class="edu-meta">Global Institute of Management Sciences, Bangalore</span>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-header">
+          <span class="edu-title">Bachelor of Computer Applications</span>
+          <span class="edu-meta">CGPA: 7.76 | 2024</span>
+        </div>
+        <div class="edu-college">Lal Bahadur Arts, Science and S.B. Solabanna Shetty Commerce College, Sagara, Karnataka</div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-header">
+          <span class="edu-title">12th – PCMB</span>
+          <span class="edu-meta">72.33% | 2021</span>
+        </div>
+        <div class="edu-college">Shree Channamallikarjuna PU College, Shikaripura, Shimoga</div>
+      </div>
+    </section>
+
+    <!-- Extra-Curricular Activities -->
+    <section>
+      <h2 class="section-title">EXTRA-CURRICULAR ACTIVITIES</h2>
+      <ul class="bullet-list">
+        <li>Vice President, Communication Club – organized group discussions, debates, and public speaking sessions.</li>
+        <li>Peer Learning Team Member – supported peers through academic collaboration, addressing study challenges and personal guidance.</li>
+        <li>Student Coordinator, Protocol Club (2024–2025) – received a Certificate of Appreciation for leadership in organizing club activities.</li>
+      </ul>
+    </section>
+
+    <!-- Awards & Achievements -->
+    <section>
+      <h2 class="section-title">AWARDS & ACHIEVEMENTS</h2>
+      <ul class="bullet-list">
+        <li>Participated in "Think Build Showcase" Project Exhibition</li>
+      </ul>
+    </section>
+
+  </main>
+
+</body>
+</html>
